@@ -11,7 +11,7 @@ class BuldakGame(QWidget):
     def initUI(self):
         # GUI 레이아웃 설정
         self.setWindowTitle('호치의 불닭가게 GAME')
-        self.setFixedSize(600, 800)
+        self.setFixedSize(650, 900)
 
         # 레이아웃 설정
         layout = QVBoxLayout()
@@ -34,41 +34,56 @@ class BuldakGame(QWidget):
         for text in buttons:
             btn = QPushButton(text)
             btn.setStyleSheet('background-color: red; color: white; padding: 10px;')
-            btn.clicked.connect(lambda checked, t=text: self.button_clicked(t))
+            # btn.clicked.connect(lambda checked, t=text: self.button_clicked(t))
             button_layout.addWidget(btn)
         layout.addLayout(button_layout)
         
-        # 타이머 섹션
+        # 시간 미션 라벨
         timer_layout = QVBoxLayout()
         timer_layout.addWidget(QLabel('시간 미션: 4분을 맞춰라!'))
         
         # 디지털 타이머 디스플레이
         self.timer_display = QLCDNumber()
-        self.timer_display.setDigitCount(8)
-        self.timer_display.display('00:00:00')
+        self.timer_display.display('00:00')
         timer_layout.addWidget(self.timer_display)
         
         # 타이머 제어 버튼
         timer_control_layout = QHBoxLayout()
-        self.start_btn = QPushButton('중지')
-        self.reset_btn = QPushButton('초기화')
+        self.start_btn = QPushButton('도전')
+        self.finish_btn = QPushButton('멈춤')
         timer_control_layout.addWidget(self.start_btn)
-        timer_control_layout.addWidget(self.reset_btn)
+        timer_control_layout.addWidget(self.finish_btn)
         timer_layout.addLayout(timer_control_layout)
         layout.addLayout(timer_layout)
         
         # Custom 버튼
-        custom_btn = QPushButton('Custom')
-        custom_btn.setStyleSheet('background-color: cyan; padding: 10px;')
-        layout.addWidget(custom_btn)
+        custom_label = QLabel('Custom')
+        custom_label.setFixedWidth(90) # 박스 너비 설정
+        custom_label.setStyleSheet('background-color: cyan; font-size: 18px; padding: 10px;')
+        layout.addWidget(custom_label)
         
-        # 맵기 단계 표시
+        # 맵기 단계 설정
         spicy_label = QLabel('맵기 단계:')
         layout.addWidget(spicy_label)
-        spicy_image = QLabel()
-        spicy_image.setPixmap(QPixmap('spicy_level.jpg').scaled(300, 50))
-        layout.addWidget(spicy_image)
-        
+
+        # 슬라이더
+        spicy_slider = QSlider(Qt.Horizontal)
+        spicy_slider.setMinimum(1)  # 최소값
+        spicy_slider.setMaximum(5)  # 최대값
+        spicy_slider.setValue(1)    # 초기값
+        spicy_slider.setTickPosition(QSlider.TicksBelow)  # 눈금 표시
+        spicy_slider.setTickInterval(1)  # 눈금 간격
+        layout.addWidget(spicy_slider)
+
+        # 슬라이더 아래 단계 표시 
+        tick_labels = ['1단계', '2단계', '3단계', '4단계', '5단계']
+        tick_labels_layout = QHBoxLayout()
+
+        for label in tick_labels:
+            tick_labels_layout.addWidget(QLabel(label))
+
+        layout.addLayout(tick_labels_layout)
+                
         # 토핑 선택 섹션
         topping_label = QLabel('토핑 선택:')
         layout.addWidget(topping_label)
@@ -94,15 +109,15 @@ class BuldakGame(QWidget):
         self.timer.timeout.connect(self.update_timer)
         self.time = QTime(0, 0)
         
-    def button_clicked(self, button_text):
-        print(f"{button_text} clicked")
+    # def button_clicked(self, button_text):
+    #     print(f"{button_text} clicked")
         
     def add_topping(self, topping):
         print(f"Added {topping}")
         
     def update_timer(self):
         self.time = self.time.addSecs(1)
-        self.timer_display.display(self.time.toString('hh:mm:ss'))
+        self.timer_display.display(self.time.toString('mm:ss'))
         
     def start_stop_timer(self):
         if self.timer.isActive():
