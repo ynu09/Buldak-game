@@ -2,9 +2,9 @@
 
 ### 기록
 
-| 날짜 | 한 일 |
-| --- | --- |
-| 2025.01.22 | 개발 주제 정하기, 아이디어 구상, figma로 gui 프로토타입 제작 |
+| 날짜 | 한 일 | 수정 파일 |
+| --- | --- | --- |
+| 2025.01.22 | 개발 주제 정하기, 아이디어 구상, figma로 gui 프로토타입 제작, gui 코드 작성 | game_gui.py |
 
 ### 아이디어
 
@@ -59,4 +59,10 @@ https://www.figma.com/design/1IwMCokE6zO7SCPnDBPpjw/Buldak?node-id=1-3&p=f&t=vc4
 
 1차
 
-![buldak_gui.png](https://github.com/user-attachments/assets/d80fffa4-ca6b-4413-8e68-bc8e43d200a6)
+![buldak_gui](https://github.com/user-attachments/assets/d80fffa4-ca6b-4413-8e68-bc8e43d200a6)
+
+### 결과물
+
+1일차
+
+![1일차](https://github.com/user-attachments/assets/46340cc7-55e8-435d-af77-7a8b63a5ae91)

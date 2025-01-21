@@ -34,7 +34,7 @@ class BuldakGame(QWidget):
         for text in buttons:
             btn = QPushButton(text)
             btn.setStyleSheet('background-color: red; color: white; padding: 10px;')
-            # btn.clicked.connect(lambda checked, t=text: self.button_clicked(t))
+            btn.clicked.connect(lambda checked, t=text: self.button_clicked(t))
             button_layout.addWidget(btn)
         layout.addLayout(button_layout)
         
@@ -108,9 +108,10 @@ class BuldakGame(QWidget):
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_timer)
         self.time = QTime(0, 0)
-        
-    # def button_clicked(self, button_text):
-    #     print(f"{button_text} clicked")
+
+    # 버튼 클릭 시, 터미널 출력        
+    def button_clicked(self, button_text):
+        print(f"{button_text} clicked")
         
     def add_topping(self, topping):
         print(f"Added {topping}")
@@ -130,7 +131,7 @@ class BuldakGame(QWidget):
     def reset_timer(self):
         self.timer.stop()
         self.time = QTime(0, 0)
-        self.timer_display.display('00:00:00')
+        self.timer_display.display('00:00')
         self.start_btn.setText('시작')
 
 def main():
